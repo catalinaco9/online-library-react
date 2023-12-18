@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const Admin = () => {
   const [product, setProduct] = useState({
     name: "",
+    author: "",
     price: "",
     description: "",
     imageURL: "",
@@ -13,7 +14,7 @@ const Admin = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       const response = await fetch(
-        "https://654bc6c15b38a59f28efb3a2.mockapi.io/products"
+        "https://657ad1a9394ca9e4af12bec4.mockapi.io/products"
       );
       const products = await response.json();
       setProducts(products);
@@ -23,7 +24,7 @@ const Admin = () => {
   }, []);
 
   const addNewProduct = () => {
-    const url = "https://654bc6c15b38a59f28efb3a2.mockapi.io/products";
+    const url = "https://657ad1a9394ca9e4af12bec4.mockapi.io/products";
     const options = {
       method: "POST",
       headers: {
@@ -35,7 +36,7 @@ const Admin = () => {
   };
 
   const deleteProduct = async (id) => {
-    const url = `https://654bc6c15b38a59f28efb3a2.mockapi.io/products/${id}`;
+    const url = `https://657ad1a9394ca9e4af12bec4.mockapi.io/products/${id}`;
     const options = {
       method: "DELETE",
       headers: {
@@ -62,6 +63,19 @@ const Admin = () => {
             onChange={(e) => {
               const productName = e.target.value;
               setProduct({ ...product, name: productName });
+            }}
+          />
+        </div>
+        <div className="flex gap-10">
+          <label htmlFor="author">Author</label>
+          <input
+            className="form-control p-2 mr-2 border-black  border-solid border-2 rounded-2xl focus:outline-none placeholder:text-black"
+            type="text"
+            id="author"
+            value={product.author}
+            onChange={(e) => {
+              const productAuthor = e.target.value;
+              setProduct({ ...product, author: productAuthor });
             }}
           />
         </div>
@@ -116,6 +130,7 @@ const Admin = () => {
           <table>
             <thead>
               <th>Name</th>
+              <th>Author</th>
               <th>Image URL</th>
               <th>Price</th>
               <th>Description</th>
@@ -126,6 +141,7 @@ const Admin = () => {
               {products.map((product) => (
                 <tr key={product.id}>
                   <td>{product.name}</td>
+                  <td>{product.author}</td>
                   <td>
                     <img src={product.imageURL} width={80} alt="" />{" "}
                   </td>

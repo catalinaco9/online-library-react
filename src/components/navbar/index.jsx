@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 export const Navbar = (props) => {
   return (
     <div
-      className="navbar shadow-lg"
+      className="navbar shadow-md"
       style={{
         backgroundColor: props.color ?? "transparent",
         color: props.textColor ?? "black",
@@ -26,7 +26,6 @@ export const Navbar = (props) => {
   );
 };
 
-//validation
 Navbar.propTypes = {
   color: PropTypes.string,
   textColor: PropTypes.string,

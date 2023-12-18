@@ -4,17 +4,17 @@ import Cart from "./pages/Cart";
 import Details from "./pages/Details";
 import Admin from "./pages/Admin";
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/navbar";
+import { Navbar } from "./components/Navbar";
 
 const App = () => {
   return (
     <>
-      <Navbar color="pink" textColor="#301934 " />
+      <Navbar color="white" textColor="#265073" />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/details" element={<Details />} />
-        <Route path="/admin" element={<Admin />} />
       </Routes>
     </>
   );

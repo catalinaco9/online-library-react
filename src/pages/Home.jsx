@@ -1,54 +1,63 @@
 import { useState, useEffect } from "react";
-import ProductCard from "../components/products/ProductCard";
+import ProductCard from "../components/Products/ProductCard";
 
 const Home = () => {
   const [products, setProducts] = useState(null);
   const [filteredProducts, setFilteredProducts] = useState(null);
 
   useEffect(() => {
-    const fetchPProducts = async () => {
+    const fetchProducts = async () => {
       const response = await fetch(
-        "https://652bdb7dd0d1df5273eecee2.mockapi.io/products"
+        "https://657ad1a9394ca9e4af12bec4.mockapi.io/products"
       );
       const products = await response.json();
       setProducts(products);
       setFilteredProducts(products);
     };
 
-    fetchPProducts();
+    fetchProducts();
   }, []);
 
+  const onChangeFilterPrice = (e, startPrice, endPrice) => {
+    if (e.target.checked) {
+      filterProductsByPrice(startPrice, endPrice);
+    } else {
+      setFilteredProducts(products);
+    }
+  };
+
   const filterProductsByPrice = (startPrice, endPrice) => {
-    const filterProductsByPrice = products.filter(
+    const filteredProductsByPrice = products.filter(
       (product) => product.price >= startPrice && product.price <= endPrice
     );
-    setFilteredProducts(filterProductsByPrice);
+    setFilteredProducts(filteredProductsByPrice);
   };
 
   return filteredProducts ? (
+    // <ProductsConainter products={products} />
     <div>
-      <div className="flex gap-4 p-5 text-center text-2xl ">
+      <div className="flex gap-4 p-5 text-center text-2xl">
         <div>
           <input
             className="h-6 w-6"
             type="checkbox"
             id="filter1"
-            onChange={(e) => {
-              if (e.target.checked) {
-                filterProductsByPrice(0, 499);
-              }
-            }}
+            onChange={(e) => onChangeFilterPrice(e, 0, 100)}
           />
-          <label htmlFor="filter1">0-499 lei</label>
+          <label htmlFor="filter1"> 0 - 100 lei</label>
         </div>
         <div>
-          <input className="h-6 w-6" type="checkbox" id="filter2" />
-          <label htmlFor="filter2"> mai mare de 500 lei</label>
+          <input
+            className="h-6 w-6"
+            type="checkbox"
+            id="filter2"
+            onChange={(e) => onChangeFilterPrice(e, 101, Infinity)}
+          />
+          <label htmlFor="filter2"> peste 101 lei</label>
         </div>
       </div>
-
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {filterProductsByPrice.map((product) => (
+        {filteredProducts.map((product) => (
           <div key={product.id}>
             <ProductCard product={product} />
           </div>
@@ -56,7 +65,7 @@ const Home = () => {
       </div>
     </div>
   ) : (
-    <div> LOADING....</div>
+    <div>Loading ...</div>
   );
 };
 
