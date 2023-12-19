@@ -5,10 +5,10 @@ import PropTypes from "prop-types";
 export const Navbar = (props) => {
   return (
     <div
-      className="navbar shadow-md"
+      className="navbar shadow-md shadow-indigo-900 sans font-bold "
       style={{
         backgroundColor: props.color ?? "transparent",
-        color: props.textColor ?? "black",
+        color: props.textColor ?? "pink",
       }}
     >
       <div className="logo">

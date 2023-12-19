@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [products, setProducts] = useState(null);
+  const [totalSum, setTotalSum] = useState(0);
   const [productsInCart, setProductsInCart] = useState(
     JSON.parse(window.localStorage.getItem("cart"))
   );
@@ -18,6 +19,17 @@ const Cart = () => {
 
     fetchProducts();
   }, []);
+
+  useEffect(() => {
+    if (products && productsInCart) {
+      const sum = productsInCart.reduce((acc, productInCart) => {
+        const product = getProductById(productInCart.id);
+        return acc + product.price * productInCart.qt;
+      }, 0);
+
+      setTotalSum(sum);
+    }
+  }, [productsInCart, products]);
 
   const getProductById = (id) => {
     const product = products.find((product) => product.id === id);
@@ -70,16 +82,17 @@ const Cart = () => {
   };
 
   return products && productsInCart ? (
-    <div className="p-10 gap-10 flex flex-col justify-center items-center">
+    <div className=" bg-purpleBackground p-10 gap-10 flex flex-col justify-center items-center">
       {productsInCart.map((productInCart) => {
         const product = getProductById(productInCart.id);
 
         return (
           <div
-            className="flex gap-10 justify-between items-center"
+            className="flex flex-row gap-20 justify-around items-center "
             key={productInCart.id}
           >
             <p>{product.name}</p>
+            <p>{product.author}</p>
             <img width={80} src={product.imageURL} />
             <p>{product.price}</p>
             <div className="flex gap-5 items-center">
@@ -109,6 +122,7 @@ const Cart = () => {
           </div>
         );
       })}
+      <p className="text-2xl">Total: {totalSum} RON</p>
     </div>
   ) : (
     <div>

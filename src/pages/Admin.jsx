@@ -51,7 +51,7 @@ const Admin = () => {
   };
 
   return (
-    <div className="p-10">
+    <div className=" bg-purpleBackground p-10 ">
       <div className="flex flex-col gap-4">
         <div className="flex gap-10">
           <label htmlFor="name">Name</label>

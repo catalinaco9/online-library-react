@@ -9,12 +9,12 @@ import { Navbar } from "./components/Navbar";
 const App = () => {
   return (
     <>
-      <Navbar color="white" textColor="#265073" />
+      <Navbar color="#a399bc" textColor="#4b475d" />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/details" element={<Details />} />
+        <Route path="/details/:id" element={<Details />} />
       </Routes>
     </>
   );

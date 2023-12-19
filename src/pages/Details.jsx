@@ -1,7 +1,35 @@
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 
 const Details = (props) => {
+  const [product, setProduct] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const { id } = useParams();
+  // console.log("Details page: id -> ", id);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const response = await fetch(
+        "https://657ad1a9394ca9e4af12bec4.mockapi.io/products"
+      );
+      const products = await response.json();
+      setProduct(getProductById(products, id));
+    };
+
+    const getProductById = (products, _id) => {
+      const _product = products.find((product) => product.id === _id);
+      return _product;
+    };
+
+    fetchProducts();
+  }, [id]);
+
+  useEffect(() => {
+    // console.log("Details page: product -> ", product);
+    setIsLoading(false);
+  }, [product]);
+
   const addProductToCart = (e) => {
     let productsInCart = [];
     if (window.localStorage.getItem("cart")) {
@@ -19,38 +47,57 @@ const Details = (props) => {
 
     window.localStorage.setItem("cart", JSON.stringify(productsInCart));
   };
-  return (
-    <div
-      key={props.id}
-      className="relative m-10 flex flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
-    >
-      <Link to={`/product/${props.id}`}>
-        <img src={props.imageURL} alt={props.name} />
-      </Link>
 
-      <div className="mt-4 px-5 pb-5">
-        <Link to={`/details/${props.id}`}>
-          <h5 className="text-xl tracking-tight text-slate-900">
-            {props.name}
-          </h5>
-        </Link>
-        <div className="mt-2 mb-5 flex items-center justify-between">
-          <p>
-            <span className="text-3xl font-bold text-slate-900">
-              {props.price} RON
-            </span>
-          </p>
+  if (isLoading === true) {
+    return <div>Loading...</div>;
+  } else {
+    return (
+      <div className="max-w-2x1 mx-auto p-7">
+        <div className="flex flex-col md:flex-row md:space-x-8 items-center">
+          <div
+            key={product.id}
+            className="flex flex-col md:flex-row md:space-x-10 items-center"
+          >
+            <Link to={`/product/${product.id}`} className="w-full md:w-1/4">
+              <img
+                src={product.imageURL}
+                alt={product.name}
+                className="w-full h-auto rounded-lg shadow-md"
+              />
+            </Link>
+
+            <div className=" bg-purpleBackground w-full md:w-1/2 bg-white rounded-lg shadow-md p-6">
+              <Link to={`/details/${product.id}`}>
+                <h5 className="text-3xl font-bold text-gray-800 mb-4">
+                  {product.name}
+                </h5>
+                <h6 className="text-xl font-bold text-gray-800 mb-4">
+                  {product.author}
+                </h6>
+              </Link>
+              <div className="flex justify-between items-center">
+                <p>
+                  <span  className="text-2xl font-bold text-slate-900">
+                    {product.price} RON
+                  </span>
+                </p>
+              </div>
+              <div className="text-gray-700 mb-4">
+                <p>{product.description}</p>
+              </div>
+              <button
+                id={product.id}
+                className="rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-large bg-purple-dark text-purple-light hover:bg-purple-light hover:text-purple-dark focus:outline-none focus:ring-4 focus:ring-purple"
+                onClick={addProductToCart}
+              >
+                Add to cart
+              </button>
+            </div>
+          </div>
         </div>
-        <button
-          id={props.id}
-          className="flex items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
-          onClick={addProductToCart}
-        >
-          Add to cart
-        </button>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 Details.propTypes = {
