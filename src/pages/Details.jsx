@@ -87,7 +87,7 @@ const Details = (props) => {
               </div>
               <button
                 id={product.id}
-                className="rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-large bg-purple-dark text-purple-light hover:bg-purple-light hover:text-purple-dark focus:outline-none focus:ring-4 focus:ring-purple"
+                className="rounded-md content-end bg-slate-900 px-5 py-2.5 text-center text-sm font-large bg-purple-dark text-purple-light hover:bg-purple-light hover:text-purple-dark focus:outline-none focus:ring-4 focus:ring-purple"
                 onClick={addProductToCart}
               >
                 Add to cart

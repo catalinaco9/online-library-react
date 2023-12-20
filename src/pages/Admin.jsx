@@ -52,78 +52,81 @@ const Admin = () => {
 
   return (
     <div className=" bg-purpleBackground p-10 ">
-      <div className="flex flex-col gap-4">
-        <div className="flex gap-10">
-          <label htmlFor="name">Name</label>
-          <input
-            className="form-control p-2 mr-2 border-black  border-solid border-2 rounded-2xl focus:outline-none placeholder:text-black"
-            type="text"
-            id="name"
-            value={product.name}
-            onChange={(e) => {
-              const productName = e.target.value;
-              setProduct({ ...product, name: productName });
-            }}
-          />
+      <div className="flex flex-col gap-4 justify-center align-center ">
+          <div className="flex gap-10">
+            <label htmlFor="name" className="text-purple-dark font-bold">Name</label>
+            <input
+              className="form-control w-1/4 p-2 mr-2 border-black  border-solid border-2 rounded-2xl focus:outline-none placeholder:text-black"
+              type="text"
+              id="name"
+              value={product.name}
+              onChange={(e) => {
+                const productName = e.target.value;
+                setProduct({ ...product, name: productName });
+              }}
+            />
+          </div>
+          <div className="flex gap-10">
+            <label htmlFor="author" className="text-purple-dark font-bold">Author</label>
+            <input
+              className="form-control w-1/4 p-2 mr-2 border-black  border-solid border-2 rounded-2xl focus:outline-none placeholder:text-black"
+              type="text"
+              id="author"
+              value={product.author}
+              onChange={(e) => {
+                const productAuthor = e.target.value;
+                setProduct({ ...product, author: productAuthor });
+              }}
+            />
+          </div>
+          <div className="flex gap-10">
+            <label htmlFor="imageURL" className="text-purple-dark font-bold">Image URL</label>
+            <input
+              type="text"
+              id="imageURL"
+              className="form-control w-1/4 p-2 mr-2 border-black  border-solid border-2 rounded-2xl focus:outline-none placeholder:text-black"
+              value={product.imageURL}
+              onChange={(e) => {
+                const imageURL = e.target.value;
+                setProduct({ ...product, imageURL: imageURL });
+              }}
+            />
+          </div>
+          <div className="flex gap-10">
+            <label htmlFor="price" className="text-purple-dark font-bold">Price</label>
+            <input
+              type="text"
+              id="price"
+              className="form-control w-1/4 p-2 mr-2 border-black  border-solid border-2 rounded-2xl focus:outline-none placeholder:text-black"
+              value={product.price}
+              onChange={(e) => {
+                const productPrice = e.target.value;
+                setProduct({ ...product, price: productPrice });
+              }}
+            />
+          </div>
+          <div className="flex gap-10">
+            <label htmlFor="description" className="text-purple-dark font-bold">Description</label>
+            <input
+              type="text"
+              id="description"
+              className="form-control resize w-1/4 h-14 inline-block p-2 mr-2 border-black  border-solid border-2 rounded-2xl focus:outline-none placeholder:text-black"
+              value={product.description}
+              onChange={(e) => {
+                const productDescription = e.target.value;
+                setProduct({ ...product, description: productDescription });
+              }}
+            />
+          </div>
+      
+        <div className="flex-row content-center">
+          <button
+            onClick={addNewProduct}
+            className="rounded-md px-5 py-2.5  text-center text-sm font-bold font-large bg-purple-dark text-purple-light hover:bg-purple-light hover:text-purple-dark focus:outline-none focus:ring-4 focus:ring-purple"
+          >
+            Save
+          </button>
         </div>
-        <div className="flex gap-10">
-          <label htmlFor="author">Author</label>
-          <input
-            className="form-control p-2 mr-2 border-black  border-solid border-2 rounded-2xl focus:outline-none placeholder:text-black"
-            type="text"
-            id="author"
-            value={product.author}
-            onChange={(e) => {
-              const productAuthor = e.target.value;
-              setProduct({ ...product, author: productAuthor });
-            }}
-          />
-        </div>
-        <div className="flex gap-10">
-          <label htmlFor="imageURL">Image URL</label>
-          <input
-            type="text"
-            id="imageURL"
-            className="form-control p-2 mr-2 border-black  border-solid border-2 rounded-2xl focus:outline-none placeholder:text-black"
-            value={product.imageURL}
-            onChange={(e) => {
-              const imageURL = e.target.value;
-              setProduct({ ...product, imageURL: imageURL });
-            }}
-          />
-        </div>
-        <div className="flex gap-10">
-          <label htmlFor="price">Price</label>
-          <input
-            type="text"
-            id="price"
-            className="form-control p-2 mr-2 border-black  border-solid border-2 rounded-2xl focus:outline-none placeholder:text-black"
-            value={product.price}
-            onChange={(e) => {
-              const productPrice = e.target.value;
-              setProduct({ ...product, price: productPrice });
-            }}
-          />
-        </div>
-        <div className="flex gap-10">
-          <label htmlFor="description">Description</label>
-          <input
-            type="text"
-            id="description"
-            className="form-control p-2 mr-2 border-black  border-solid border-2 rounded-2xl focus:outline-none placeholder:text-black"
-            value={product.description}
-            onChange={(e) => {
-              const productDescription = e.target.value;
-              setProduct({ ...product, description: productDescription });
-            }}
-          />
-        </div>
-        <button
-          onClick={addNewProduct}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-        >
-          Save
-        </button>
       </div>
       <div>
         {products && (
@@ -139,7 +142,7 @@ const Admin = () => {
             </thead>
             <tbody>
               {products.map((product) => (
-                <tr key={product.id}>
+                <tr key={product.id} className="border-b-2 border-gray-300 pb-4">
                   <td>{product.name}</td>
                   <td>{product.author}</td>
                   <td>
@@ -158,7 +161,7 @@ const Admin = () => {
                         );
                         setProduct(productToBeEdited);
                       }}
-                      className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                      className=" hover:bg-purple-dark hover:text-purple-light bg-purple-light text-purple-dark focus:outline-none focus:ring-4 focus:ring-purple font-semibold py-2 px-4 border border-gray-400 rounded shadow"
                     >
                       Edit
                     </button>
@@ -167,7 +170,7 @@ const Admin = () => {
                     <button
                       id={product.id}
                       onClick={(e) => deleteProduct(e.target.id)}
-                      className="bg-[brown] hover:bg-[gray] text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                      className="bg-red hover:bg-[gray] text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
                     >
                       Delete
                     </button>

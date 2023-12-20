@@ -39,9 +39,12 @@ const Home = () => {
   }, [maxPriceAbsolute]);
 
   const filterProductsByPrice = (startPrice, endPrice) => {
-    const filteredProductsByPrice = products.filter(
-      (product) => product.price >= startPrice && product.price <= endPrice
-    );
+    const filteredProductsByPrice = products
+      .filter(
+        (product) => product.price >= startPrice && product.price <= endPrice
+      )
+      .sort((a, b) => a.price - b.price);
+
     setFilteredProducts(filteredProductsByPrice);
   };
 
@@ -52,9 +55,9 @@ const Home = () => {
 
   const handleSortReset = (e) => {
     e.preventDefault();
-    // show all books
-    filterProductsByPrice(0, maxPriceAbsolute);
-    // set text box values
+
+    setFilteredProducts(products);
+
     setMinPrice(0);
     setMaxPrice(maxPriceAbsolute);
   };
@@ -91,15 +94,14 @@ const Home = () => {
           <div className="flex trasnparent justify-between items-center">
             Min:{" "}
             <input
-              className="price-filter bg-transparent"
+              className="price-filter bg-purpleBackground"
               type="number"
               value={minPrice}
               disabled={true}
-             
             />
             Max:{" "}
             <input
-              className="price-filter bg-transparent"
+              className="price-filter bg-purpleBackground"
               type="number"
               value={maxPrice}
               disabled={true}

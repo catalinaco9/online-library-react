@@ -1,0 +1,76 @@
+button.price-filter {
+    padding: 0.25rem 0.85rem;
+    border-radius: 5px;
+    margin-left: 15px;
+    transition: 0.1s ease-out;
+
+}
+
+button.price-filter:hover {
+    transform: 0.1s ease-in;
+}
+
+
+input.price-filter:first-of-type {
+    margin-right: 10px;
+}
+
+input.price-filter ::-webkit-inner-spin-button,
+input.price-filter ::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Gradient Range Slider */
+#range-slider-gradient {
+    height: 15px;
+    border-radius: 12px;
+    background: #353644;
+  }
+  
+  #range-slider-gradient .range-slider__thumb {
+    border: 6px solid #fff;
+    box-sizing: border-box;
+  }
+  
+  #range-slider-gradient .range-slider__thumb[data-lower] {
+    background: #aea6c0;
+  }
+  
+  #range-slider-gradient .range-slider__thumb[data-upper] {
+    background: #64b39c;
+  }
+  
+  #range-slider-gradient .range-slider__range {
+    background: linear-gradient(to right, #aea6c0, #64b39c);
+    background-size: 100% 100%;
+    background-position: 50% 0;
+  }
+  
+  #range-slider-gradient .range-slider__range[data-active],
+  #range-slider-gradient
+    .range-slider__thumb[data-active]
+    ~ .range-slider__range {
+    animation: move-bg 0.75s infinite linear;
+  }
+  @keyframes move-bg {
+  0% {
+    background-position: 50% 0;
+  }
+
+  25% {
+    background-position: 100% 0;
+  }
+
+  50% {
+    background-position: 50% 0;
+  }
+
+  75% {
+    background-position: 0% 0;
+  }
+
+  100% {
+    background-position: 50% 0;
+  }
+}

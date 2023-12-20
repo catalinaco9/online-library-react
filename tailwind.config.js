@@ -19,7 +19,8 @@ export default {
         DEFAULT: "#6B6280",
         light: "#a399bc",
       },
-      purpleBackground:"#E3E2E5"
+      purpleBackground:"#E3E2E5",
+      red:"#7E5D5D"
     },
   },
   plugins: [],

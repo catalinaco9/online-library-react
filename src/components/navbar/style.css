@@ -6,6 +6,8 @@
 
 .navbar a {
   text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease-in-out;
 }
 
 .navbar .menu {
@@ -13,10 +15,19 @@
   gap: 10px;
 }
 
-.navbar a,
-.navbar a:hover,
-.navbar a:focus,
-.navbar a:active {
-  text-decoration: none;
-  color: inherit;
+.navbar a:hover {
+  color: #457367;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

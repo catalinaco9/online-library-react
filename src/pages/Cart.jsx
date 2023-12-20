@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
@@ -82,53 +82,59 @@ const Cart = () => {
   };
 
   return products && productsInCart ? (
-    <div className=" bg-purpleBackground p-10 gap-10 flex flex-col justify-center items-center">
-      {productsInCart.map((productInCart) => {
-        const product = getProductById(productInCart.id);
-
-        return (
-          <div
-            className="flex flex-row gap-20 justify-around items-center "
-            key={productInCart.id}
-          >
-            <p>{product.name}</p>
-            <p>{product.author}</p>
-            <img width={80} src={product.imageURL} />
-            <p>{product.price}</p>
-            <div className="flex gap-5 items-center">
-              <button
-                id={productInCart.id}
-                className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
-                onClick={decreaseQuantity}
-              >
-                -
-              </button>
-              <p>{productInCart.qt}</p>
-              <button
-                id={productInCart.id}
-                className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
-                onClick={increaseQuantity}
-              >
-                +
-              </button>
-              <button
-                id={productInCart.id}
-                className="bg-red-400 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
-                onClick={deleteProductFromCart}
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        );
-      })}
-      <p className="text-2xl">Total: {totalSum} RON</p>
+    <div className="p-10">
+      <table className="table-auto w-full">
+        <tbody>
+          {productsInCart.map((productInCart) => {
+            const product = getProductById(productInCart.id);
+            return (
+              <tr key={productInCart.id} className="border-b">
+                <td className="px-4 py-2 font-bold">{product.name}</td>
+                <td className="px-4 py-2">{product.author}</td>
+                <td className="px-4 py-2">
+                  <img width={80} src={product.imageURL} alt={product.name} />
+                </td>
+                <td className="px-4 py-2">{product.price}</td>
+                <td className="px-4 py-2">
+                  <div className="flex gap-5 items-center">
+                    <button
+                      id={productInCart.id}
+                      className="hover:bg-purple-dark hover:text-purple-light bg-purple-light text-purple-dark focus:outline-none focus:ring-4 focus:ring-purple text-gray-800 font-bold py-2 px-4 rounded"
+                      onClick={decreaseQuantity}
+                    >
+                      -
+                    </button>
+                    <td className="px-4 py-2">{productInCart.qt}</td>
+                    <button
+                      id={productInCart.id}
+                      className="hover:bg-purple-dark hover:text-purple-light bg-purple-light text-purple-dark focus:outline-none focus:ring-4 focus:ring-purple text-gray-800 font-bold py-2 px-4 rounded"
+                      onClick={increaseQuantity}
+                    >
+                      +
+                    </button>
+                    <button
+                      id={productInCart.id}
+                      className="bg-red hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
+                      onClick={deleteProductFromCart}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      <div className="flex justify-center">
+        <p className="text-2xl mt-4 font-bold ">Total: {totalSum.toFixed(2)} RON</p>
+      </div>
     </div>
   ) : (
     <div>
-      Cosul este momentan gol, va rugam sa adaugati produse din{" "}
+      The cart is currently empty, please add{" "}
       <Link className="underline text-blue-600" to="/">
-        pagina de produse
+        products
       </Link>
     </div>
   );

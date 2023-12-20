@@ -23,7 +23,7 @@ const ProductCard = (props) => {
   return (
     <div
       key={props.product.id}
-      className="relative m-10 transparent overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
+      className="relative m-10 transparent overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md hover:shadow-lg shadow-purple-dark transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
     >
       <div
         className="image-wrapper max-w-screen-md mx-auto overflow-hidden "
