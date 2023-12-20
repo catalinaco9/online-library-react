@@ -10,4 +10,4 @@ Currently, two official plugins are available:
 ## Setup
 npm i
 
-nmp run dev
+npm run dev
